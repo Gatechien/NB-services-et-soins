@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+
+<a type="button" href="{{ path('app_contact_index') }}"><span class="btn btn-dark my-1">Tous</span></a>
+<a type="button" href="{{ path('app_contact_babysitting') }}"><span class="btn btn-dark my-1">Service Babysitting</span></a>
+<a type="button" href="{{ path('app_contact_housekeeping') }}"><span class="btn btn-dark my-1">Service Ménager</span></a>
+<a type="button" href="{{ path('app_contact_personalAssistance') }}"><span class="btn btn-dark my-1">Service Aide à la personne</span></a>
+<a type="button" href="{{ path('app_contact_administrativeDepartment') }}"><span class="btn btn-dark my-1">Service Administratif Déçès</span></a>
+
+    <h1 class="mt-2">Demande de service</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="cache">Nom</th>
+                <th class="cache">Prénom</th>
+                <th class="cache">Ville</th>
+                <th class="">Service</th>
+                <th class="cache">Demande fait le</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+            <tr>
+                <td class="cache">{{ contact.lastname }}</td>
+                <td class="cache">{{ contact.firstname }}</td>
+                <td class="cache">{{ contact.city }}</td>
+            {% if contact.babysittingService == true %}
+                <td class="">Service : Garde d'enfant</td>
+            {% endif %}
+            {% if contact.personalAssistanceService == true %}
+                <td class="">Service : Aide à la personne</td>
+            {% endif %}
+            {% if contact.housekeeping == true %}
+                <td class="">Service : Aide ménager</td>
+            {% endif %}
+            {% if contact.administrativeDepartment == true %}
+                <td class="">Service : Administratif déçès</td>
+            {% endif %}
+                <td class="cache">{{ contact.createdAt ? contact.createdAt|date('Y-m-d') : '' }}</td>  
+                <td>
+                <div class="col d-flex">
+                    <a type="button" class="btn btn-primary mx-1" href="{{ path('app_contact_show', {'id': contact.id}) }}">Voir</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    {{ include('contact/_delete_form.html.twig') }}
+                {% endif %}
+                </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">Vous n'avez pas de demmande</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

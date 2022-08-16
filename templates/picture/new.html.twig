@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle image{% endblock %}
+
+{% block body %}
+
+    <a class="btn btn-dark" href="{{ path('app_picture_index') }}">Retour</a>
+        <h1 class="mt-2">Ajouter une nouvelle image</h1> 
+    {% if is_granted('ROLE_ADMIN') %}
+        {{ include('picture/_form.html.twig') }}
+    {% endif %}
+
+{% endblock %}

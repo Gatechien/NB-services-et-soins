@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Banque d'image{% endblock %}
+
+{% block body %}
+
+<a class="btn btn-dark" href="{{ path('app_picture_new') }}">Ajouter</a>
+
+    <h1 class="mt-2">Banque d'image</h1>
+    
+    <table class="table table-hover">
+        <thead>
+            <tr> 
+                <th>Place dans le carroussel</th>
+                <th class="cache">Nom</th>
+                <th>Poster</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for picture in pictures %}
+            <tr>
+                <td>{{ picture.placeOrder }}</td>
+                <td class="cache">{{ picture.image.originalName}}</td>
+                <td><img class="img-thumbnail img-fluid image" src="{{ asset("images/carrousel/"~picture.image.name)}}"</td>
+                <td>
+                {% if is_granted('ROLE_ADMIN') %}
+                    {{ include('picture/_delete_form.html.twig') }}
+                {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune image trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

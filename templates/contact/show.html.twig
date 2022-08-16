@@ -1,0 +1,231 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+
+<a class="btn btn-dark mb-2" href="{{ path('app_contact_index') }}"><span > Retour</span></a>
+
+    <h1 class="mb-2">Contact : {{ contact.firstname }} {{ contact.lastname }}</h1>
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ contact.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ contact.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Nom de jeune fille</th>
+                <td>{{ contact.maidenName }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ contact.mail }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ contact.adress }}</td>
+            </tr>
+            <tr>
+                <th>Code postal</th>
+                <td>{{ contact.zipCode }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ contact.city }}</td>
+            </tr>
+            <tr>
+                <th>Tél:</th>
+                <td>{{ contact.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Info suplémentaire</th>
+                <td>{{ contact.content }}</td>
+            </tr>
+            <tr>
+                <th>Prise de contact</th>
+                <td>{{ contact.preferency ? 'Tél' : 'Mail' }}</td>
+            </tr>
+            <tr>
+                <th>Demandé le</th>
+                <td>{{ contact.createdAt ? contact.createdAt|date("m/d/Y", "Europe/Paris") : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if babysittingService == true %}
+    <h1>Service : Garde d'enfant</h1>
+        <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <th>Nombre d'enfant</th>
+                    <td>{{babysittingService.numberChild}}</td>
+                </tr>
+                <tr>
+                    <th>Nombre d'heure souhaité</th>
+                    <td>{{babysittingService.numberHour}}</td>
+                </tr>
+                <tr>
+                    <th>Info suplémentaire</th>
+                    <td>{{babysittingService.content}}</td>
+                </tr>
+                {% for day in babysittingService.days %}
+                <tr>
+                    <th>Le</th>
+                    <td>{{day.name}} </td>
+                </tr>
+                {% endfor %}
+                {% for inter in babysittingService.intervention %}
+                <tr>
+                    <th>Invertention choisi le</th>
+                    <td>{{inter.moment}} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% if personalAssistanceService == true %}
+    <h1>Service : Aide à la personne</h1>
+        <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <th>Avez vous une aide financière</th>
+                    <td>{{personalAssistanceService.financialHelp ? 'Oui' : 'Non' }}</td>
+                </tr>
+                <tr>
+                    <th>Organisme</th>
+                    <td>{{personalAssistanceService.organization}}</td>
+                </tr>
+                <tr>
+                    <th>Nombre d'heure financée</th>
+                    <td>{{personalAssistanceService.numberHour}}</td>
+                </tr>
+                <tr>
+                    <th>Info suplémentaire</th>
+                    <td>{{personalAssistanceService.content}}</td>
+                </tr>
+                {% for help in personalAssistanceService.personalAssistance %}
+                <tr>
+                    <th>Type d'aide souhaité</th>
+                    <td>{{help.type}} </td>
+                </tr>
+                {% endfor %}
+                {% for inter in personalAssistanceService.intervention %}
+                <tr>
+                    <th>Invertention choisi le</th>
+                    <td>{{inter.moment}} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% if housekeepingService == true %}
+    <h1>Service : Ménager</h1>
+        <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <th>Nombre d'heure de menage</th>
+                    <td>{{housekeepingService.numberHour}}</td>
+                </tr>
+                <tr>
+                    <th>Info suplémentaire</th>
+                    <td>{{housekeepingService.content}}</td>
+                </tr>
+                {% for frequence in housekeepingService.frequency %}
+                <tr>
+                    <th>Fréquence d'intervention</th>
+                    <td>{{frequence.type}} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% if administrativeDepartmentService == true %}
+    <h1>Service : Administratif décès</h1>
+        <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <th>Prénom de la personne décédée</th>
+                    <td>{{administrativeDepartmentService.firstnameOfDeceased}}</td>
+                </tr>
+                <tr>
+                    <th>Nom de la personne décédée</th>
+                    <td>{{administrativeDepartmentService.lastNameOfDeceased}}</td>
+                </tr>
+                <tr>
+                    <th>Nom de jeune fille de la personne décédée</th>
+                    <td>{{administrativeDepartmentService.maidenNameOfDeceased}}</td>
+                </tr>
+                <tr>
+                    <th>Adresse de la personne décédée</th>
+                    <td>{{administrativeDepartmentService.adressDeceased}}</td>
+                </tr>
+                <tr>
+                    <th>Code postal de la personne décédée</th>
+                    <td>{{administrativeDepartmentService.zipCodeOfDeceased}}</td>
+                </tr>
+                <tr>
+                    <th>Ville de la personne décédée</th>
+                    <td>{{administrativeDepartmentService.cityOfDeceased}}</td>
+                </tr>
+                <tr>
+                    <th>Année de naissance</th>
+                    <td>{{administrativeDepartmentService.dateOfBirth|date("m/d/Y", "Europe/Paris")}}</td>
+                </tr>
+                <tr>
+                    <th>Lieu de naissance</th>
+                    <td>{{administrativeDepartmentService.placeOfBirth}}</td>
+                </tr>
+                <tr>
+                    <th>Dâte du décès</th>
+                    <td>{{administrativeDepartmentService.dateOfDeceased|date("m/d/Y", "Europe/Paris")}}</td>
+                </tr>
+                <tr>
+                    <th>Lieu de décès</th>
+                    <td>{{administrativeDepartmentService.placeOfDeceased}}</td>
+                </tr>
+            </tbody>
+        </table>
+    <h2>Personne en charge du décès</h2>
+        <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{administrativeDepartmentService.lastname}}</td>
+                </tr>
+                <tr>
+                    <th>Prénom</th>
+                    <td>{{administrativeDepartmentService.firstname}}</td>
+                </tr>
+                <tr>
+                    <th>Adresse</th>
+                    <td>{{administrativeDepartmentService.adress}}</td>
+                </tr>
+                <tr>
+                    <th>Code postal</th>
+                    <td>{{administrativeDepartmentService.postalCode}}</td>
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <td>{{administrativeDepartmentService.city}}</td>
+                </tr>
+                <tr>
+                    <th>Info suplémentaire</th>
+                    <td>{{administrativeDepartmentService.content}}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        {{ include('contact/_delete_form.html.twig') }}
+    {% endif %}
+
+{% endblock %}

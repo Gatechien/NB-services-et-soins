@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recruitment{% endblock %}
+
+{% block body %}
+
+    <a class='btn btn-dark' href="{{ path('app_recruitment_index') }}">retour</a>
+
+    <h1 class="mt-2">Annonces d'emploi</h1>
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ recruitment.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ recruitment.title }}</td>
+            </tr>
+            <tr>
+                <th>titre descriptif</th>
+                <td>{{ recruitment.titleDescription}}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ recruitment.description }}</td>
+            </tr>
+              <tr>
+                <th>titre descriptif 2</th>
+                <td>{{ recruitment.titleDescription2}}</td>
+            </tr>
+            <tr>
+                <th>Description 2</th>
+                <td>{{ recruitment.description2 }}</td>
+            </tr>
+              <tr>
+                <th>titre descriptif 3</th>
+                <td>{{ recruitment.titleDescription3}}</td>
+            </tr>
+            <tr>
+                <th>Description 3</th>
+                <td>{{ recruitment.description3 }}</td>
+            </tr>
+            <tr>
+                <th>Nous cherchons</th>
+                <td>{{ recruitment.weSearch }}</td>
+            </tr>
+            <tr>
+                <th>Avantage</th>
+                <td>{{ recruitment.avantage }}</td>
+            </tr>
+             <tr>
+                <th>diplôme requis</th>
+                <td>{{ recruitment.licenceRequeried }}</td>
+            </tr>
+            <tr>
+                <th>expériences  requises</th>
+                <td>{{ recruitment.experienceRequeried}}</td>
+            </tr>
+            <tr>
+                <th>permis de conduire</th>
+                <td>{{ recruitment.driveLicense ? 'oui' : 'Non'  }}</td>
+            </tr>
+             <tr>
+                <th>info sur les déplacement</th>
+                <td>{{ recruitment.deplacementInfo }}</td>
+            </tr>
+             <tr>
+                <th>Type de contrat</th>
+                <td>{{ recruitment.typeContrat}}</td>
+            </tr>
+             <tr>
+                <th>horaire de travail</th>
+                <td>{{ recruitment.workingHour}}</td>
+            </tr>
+             <tr>
+                <th>Jour off</th>
+                <td>{{ recruitment.dayOff}}</td>
+            </tr>
+             <tr>
+                <th>Salaire</th>
+                <td>{{ recruitment.Salary}}</td>
+            </tr>
+              <tr>
+                <th>opportunité</th>
+                <td>{{ recruitment.opportunity}}</td>
+            </tr>
+            <tr>
+                <th>Published_On</th>
+                <td>{{ recruitment.publishedOn ? recruitment.publishedOn|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ recruitment.visibility ? 'oui' : 'Non' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class='btn btn-dark mx-1 my-2' href="{{ path('app_recruitment_edit', {'id': recruitment.id}) }}">Modifier</a>
+        {{ include('recruitment/_delete_form.html.twig') }}
+    {% endif %}
+   
+{% endblock %}

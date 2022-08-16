@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une aide à la personne{% endblock %}
+
+{% block body %}
+
+    <a class="btn btn-dark mb-2" href="{{ path('app_personal_assistance_index') }}">Retour</a>
+        <h1 class="mt-2">Modifier un type d'aide à la personne</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="mx-1">
+            {{ include('personal_assistance/_form.html.twig', {'button_label': 'Modifier'}) }}
+        </div>
+        <div class="mt-2">
+            {{ include('personal_assistance/_delete_form.html.twig') }}
+        </div>
+    {% endif %}
+
+{% endblock %}

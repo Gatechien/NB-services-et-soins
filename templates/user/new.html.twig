@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle utilisateur{% endblock %}
+
+{% block body %}
+
+    <a class="btn btn-dark" href="{{ path('app_user_index') }}">Retour</a>
+        <h1 class="mt-2">Créer un nouvelle utilisateur</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+        {{ include('user/_form.html.twig') }}
+    {% endif %}
+
+{% endblock %}

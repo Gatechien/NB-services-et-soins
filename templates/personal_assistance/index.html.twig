@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Aide à la personne {% endblock %}
+
+{% block body %}
+
+ <a class="btn btn-dark" href="{{ path('app_personal_assistance_new') }}">Ajouter</a>
+
+    <h1 class="mt-2">Aide à la personne</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for personal_assistance in personal_assistances %}
+            <tr>
+                <td>{{ personal_assistance.type }}</td>
+                <td>
+                <div class="col d-flex">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-primary mx-1" href="{{ path('app_personal_assistance_edit', {'id': personal_assistance.id}) }}">Modifier</a>
+                    <div class="cache">
+                    {{ include('personal_assistance/_delete_form.html.twig') }}
+                    </div>
+                {% endif %}
+                </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune aide à la personne trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

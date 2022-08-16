@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle aide à la personne{% endblock %}
+
+{% block body %}
+
+    <a class="btn btn-dark" href="{{ path('app_personal_assistance_index') }}">Retour</a>
+        <h1 class="mt-2">Créer une nouvelle aide à la personne</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+        {{ include('personal_assistance/_form.html.twig') }}
+    {% endif %}
+
+{% endblock %}

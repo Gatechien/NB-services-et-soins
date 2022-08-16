@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}NBSS BACKOFFICE{% endblock %}
+
+{% block body %}
+
+    {# dans ce block je pourrais mettre une entête ou pas #}
+    {% block header %}
+    <div class="my-5 py-4 text-center">
+        <img src="{{ asset('images/NBSS-logo.png') }}" height="200" alt="Logo NBSS" class="my-3">
+        <h1 class="display-6 fw-bold">Bienvenue dans le BackOffice</h1>
+        {% if app.user.email == "nbsstest1@gmail.com" %}
+            <h2 class="display-6 fw-bold">Benedicte</h1>
+        {% endif %}
+        {% if app.user.email == "nbsstest2@gmail.com" %}
+            <h2 class="display-6 fw-bold">Natacha</h1>
+        {% endif %}
+    </div>
+    {% endblock %}
+
+{% endblock %}
